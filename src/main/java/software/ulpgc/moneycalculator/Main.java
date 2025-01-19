@@ -7,8 +7,5 @@ public class Main {
     public static void main(String[] args) {
         CurrencyLoader loader = new TsvFileCurrencyLoader(new File("src/currencies.tsv"));
         List<Currency> currencies = loader.load();
-        for (Currency currency : currencies) {
-            System.out.println(currency);
-        }
     }
 }
