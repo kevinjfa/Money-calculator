@@ -23,7 +23,17 @@ public class FloatRatesExchangeRateLoader implements ExchangeRateLoader {
             Scanner sc = new Scanner(con.getInputStream());
             String response = sc.useDelimiter("\\A").next();
             JSONObject json = new JSONObject(response);
-            JSONObject res = json.getJSONObject(currency2.getCode().toLowerCase());
+            JSONObject res = new JSONObject();
+            if (currency1.equals(currency2)) {
+                res.accumulate("rate", 1);
+                if (!currency1.getCode().equals("USD")) {
+                    res.accumulate("date", json.getJSONObject("usd").getString("date"));
+                } else {
+                    res.accumulate("date", json.getJSONObject("eur").getString("date"));
+                }
+            } else {
+                res = json.getJSONObject(currency2.getCode().toLowerCase());
+            }
             ArrayList<Object> ret = new ArrayList<>();
             ret.add(res);
             ret.add(currency1);
