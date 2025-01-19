@@ -60,6 +60,23 @@ public class CurrencyConverterGUI extends JFrame {
         });
         panel.add(convertButton);
 
+        JButton swapButton = new JButton("Intercambiar");
+        swapButton.setBounds(350, 60, 200, 25);
+        swapButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = fromCurrency.getSelectedIndex();
+                int selectedIndex2 = toCurrency.getSelectedIndex();
+                fromCurrency.setSelectedIndex(selectedIndex2);
+                toCurrency.setSelectedIndex(selectedIndex);
+                fromCurrency.repaint();
+                fromCurrency.revalidate();
+                toCurrency.repaint();
+                toCurrency.revalidate();
+            }
+        });
+        panel.add(swapButton);
+
         resultLabel = new JLabel("Resultado:");
         resultLabel.setBounds(20, 140, 250, 25);
         panel.add(resultLabel);
